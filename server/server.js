@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 // Ontvang de captcha gegevens vanuit een POST request
 app.post('/captcha', async (req, res) => {
     token = req.body.response;
-    // Vul hier je secret key in van Google reCAPTCHA
+    // Vul hier je secret key in van Google reCAPTCHA, check dat je dit op een veilige (security) manier doet.
     let secret = "<GEHEIME_SLEUTEL>";
     // Verstuur de gegevens naar de Google Api
     try {
@@ -37,6 +37,7 @@ app.post('/captcha', async (req, res) => {
                 'Content-Type': 'application/json'
             }
         });
+        // De response vanuit Google (meer info: https://developers.google.com/recaptcha/docs/v3#site_verify_response):
         const result = await response.json();
        // Stuur het resultaat weer terug naar je client
         res.json(result);
